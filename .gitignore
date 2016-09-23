@@ -1,7 +1,9 @@
+.idea
 mysqlsuperdump
 mysqlsuperdump.cfg
 test.*
 tags
+*.iml
 *.sql
 *.swp
 *.out

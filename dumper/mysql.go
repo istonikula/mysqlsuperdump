@@ -220,8 +220,9 @@ func (d *mySQL) Dump(w io.Writer) (err error) {
 	}
 
 	for _, table := range tables {
-		if d.FilterMap[table] != "ignore" {
-			skipData := d.FilterMap[table] == "nodata"
+		tbl := strings.ToLower(table)
+		if d.FilterMap[tbl] != "ignore" {
+			skipData := d.FilterMap[tbl] == "nodata"
 			if !skipData && d.UseTableLock {
 				d.LockTableReading(table)
 				d.FlushTable(table)
