@@ -227,17 +227,17 @@ func (d *mySQL) Dump(w io.Writer) (err error) {
 				d.LockTableReading(table)
 				d.FlushTable(table)
 			}
-			d.DumpCreateTable(w, table)
+			//d.DumpCreateTable(w, table)
 			if !skipData {
 				cnt, err := d.DumpTableHeader(w, table)
 				if err != nil {
 					return err
 				}
 				if cnt > 0 {
-					d.DumpTableLockWrite(w, table)
+					//d.DumpTableLockWrite(w, table)
 					d.DumpTableData(w, table)
 					fmt.Fprintln(w)
-					d.DumpUnlockTables(w)
+					//d.DumpUnlockTables(w)
 					if d.UseTableLock {
 						d.UnlockTables()
 					}
