@@ -94,8 +94,9 @@ func (d *mySQL) GetColumnsForSelect(table string) (columns []string, err error) 
 	if columns, err = rows.Columns(); err != nil {
 		return
 	}
+	tbl := strings.ToLower(table)
 	for k, column := range columns {
-		replacement, ok := d.SelectMap[table][column]
+		replacement, ok := d.SelectMap[tbl][strings.ToLower(column)]
 		if ok {
 			columns[k] = fmt.Sprintf("%s AS `%s`", replacement, column)
 		} else {
@@ -227,7 +228,7 @@ func (d *mySQL) Dump(w io.Writer) (err error) {
 				d.LockTableReading(table)
 				d.FlushTable(table)
 			}
-			//d.DumpCreateTable(w, table)
+			d.DumpCreateTable(w, table)
 			if !skipData {
 				cnt, err := d.DumpTableHeader(w, table)
 				if err != nil {
